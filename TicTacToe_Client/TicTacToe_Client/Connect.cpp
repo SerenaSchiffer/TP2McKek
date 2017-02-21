@@ -1,4 +1,4 @@
-#include "MyForm.h"
+#include "Connect.h"
 
 using namespace System;
 using namespace System::Windows::Forms;
@@ -10,6 +10,6 @@ void Main(array<String^>^ args)
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 
-	TicTacToe_Client::MyForm form;
+	TicTacToe_Client::Connect form;
 	Application::Run(%form);
 }
