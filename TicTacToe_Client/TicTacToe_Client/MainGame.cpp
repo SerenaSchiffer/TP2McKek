@@ -1,16 +1,15 @@
-#include "Connect.h"
-#include "Client.h"
+#include "MainGame.h"
 
 using namespace System;
 using namespace System::Windows::Forms;
 
 
 [STAThread]
-void main2()
+void main()
 {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
-	Client::Test();
-	TicTacToe_Client::Connect form;
+
+	TicTacToe_Client::MainGame form;
 	Application::Run(%form);
 }

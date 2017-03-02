@@ -138,16 +138,23 @@
   <ItemGroup>
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="Connect.cpp" />
+    <ClCompile Include="MainGame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h" />
     <ClInclude Include="Connect.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="MainGame.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Connect.resx">
       <DependentUpon>Connect.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainGame.resx">
+      <DependentUpon>MainGame.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

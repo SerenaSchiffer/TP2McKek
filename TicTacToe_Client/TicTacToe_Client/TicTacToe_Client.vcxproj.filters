@@ -18,7 +18,11 @@
     <ClCompile Include="Connect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="MainGame.cpp">
+=======
     <ClCompile Include="Client.cpp">
+>>>>>>> 95bd42f9592c0e3ec817575e29ebbb7e79c75d03
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -26,7 +30,11 @@
     <ClInclude Include="Connect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="MainGame.h">
+=======
     <ClInclude Include="Client.h">
+>>>>>>> 95bd42f9592c0e3ec817575e29ebbb7e79c75d03
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
