@@ -5,7 +5,7 @@ using namespace System::Windows::Forms;
 
 
 [STAThread]
-void Main(array<String^>^ args)
+void main()
 {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
