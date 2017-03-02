@@ -1,5 +1,8 @@
 #pragma once
 
+#include <string>
+#include <iostream>
+
 namespace TicTacToe_Client {
 
 	using namespace System;
@@ -116,6 +119,8 @@ namespace TicTacToe_Client {
 			this->case1->Size = System::Drawing::Size(150, 150);
 			this->case1->TabIndex = 0;
 			this->case1->TabStop = false;
+			this->case1->Tag = L"1";
+			this->case1->Click += gcnew System::EventHandler(this, &MainGame::case_Click);
 			// 
 			// case2
 			// 
@@ -125,6 +130,7 @@ namespace TicTacToe_Client {
 			this->case2->Size = System::Drawing::Size(150, 150);
 			this->case2->TabIndex = 1;
 			this->case2->TabStop = false;
+			this->case2->Click += gcnew System::EventHandler(this, &MainGame::case_Click);
 			// 
 			// case3
 			// 
@@ -134,6 +140,7 @@ namespace TicTacToe_Client {
 			this->case3->Size = System::Drawing::Size(150, 150);
 			this->case3->TabIndex = 2;
 			this->case3->TabStop = false;
+			this->case3->Click += gcnew System::EventHandler(this, &MainGame::case_Click);
 			// 
 			// case4
 			// 
@@ -143,6 +150,7 @@ namespace TicTacToe_Client {
 			this->case4->Size = System::Drawing::Size(150, 150);
 			this->case4->TabIndex = 3;
 			this->case4->TabStop = false;
+			this->case4->Click += gcnew System::EventHandler(this, &MainGame::case_Click);
 			// 
 			// case6
 			// 
@@ -152,6 +160,7 @@ namespace TicTacToe_Client {
 			this->case6->Size = System::Drawing::Size(150, 150);
 			this->case6->TabIndex = 5;
 			this->case6->TabStop = false;
+			this->case6->Click += gcnew System::EventHandler(this, &MainGame::case_Click);
 			// 
 			// case7
 			// 
@@ -161,6 +170,7 @@ namespace TicTacToe_Client {
 			this->case7->Size = System::Drawing::Size(150, 150);
 			this->case7->TabIndex = 6;
 			this->case7->TabStop = false;
+			this->case7->Click += gcnew System::EventHandler(this, &MainGame::case_Click);
 			// 
 			// case8
 			// 
@@ -170,6 +180,7 @@ namespace TicTacToe_Client {
 			this->case8->Size = System::Drawing::Size(150, 150);
 			this->case8->TabIndex = 7;
 			this->case8->TabStop = false;
+			this->case8->Click += gcnew System::EventHandler(this, &MainGame::case_Click);
 			// 
 			// case5
 			// 
@@ -179,6 +190,7 @@ namespace TicTacToe_Client {
 			this->case5->Size = System::Drawing::Size(150, 150);
 			this->case5->TabIndex = 4;
 			this->case5->TabStop = false;
+			this->case5->Click += gcnew System::EventHandler(this, &MainGame::case_Click);
 			// 
 			// case9
 			// 
@@ -188,6 +200,7 @@ namespace TicTacToe_Client {
 			this->case9->Size = System::Drawing::Size(150, 150);
 			this->case9->TabIndex = 8;
 			this->case9->TabStop = false;
+			this->case9->Click += gcnew System::EventHandler(this, &MainGame::case_Click);
 			// 
 			// background
 			// 
@@ -285,5 +298,43 @@ namespace TicTacToe_Client {
 
 		}
 #pragma endregion
-	};
+	private: System::Void case_Click(System::Object^  sender, System::EventArgs^  e) {
+		//Déterminer on est sur quel controle
+		int numCase = 0;
+		#pragma region chooseNumCase
+		if (sender == case1)
+			numCase = 1;
+
+		if (sender == case2)
+			numCase = 2;
+
+		if (sender == case2)
+			numCase = 2;
+
+		if (sender == case3)
+			numCase = 3;
+
+		if (sender == case4)
+			numCase = 4;
+
+		if (sender == case5)
+			numCase = 5;
+
+		if (sender == case6)
+			numCase = 6;
+
+		if (sender == case7)
+			numCase = 7;
+
+		if (sender == case8)
+			numCase = 8;
+
+		if (sender == case9)
+			numCase = 9;
+		#pragma endregion chooseNumCase
+		
+		//TODO: choisir traiter la case
+		std::cout << numCase;
+	}
+};
 }
