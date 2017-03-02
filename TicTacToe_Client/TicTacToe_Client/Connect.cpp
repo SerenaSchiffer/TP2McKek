@@ -10,8 +10,7 @@ void main()
 {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
-	Client qqch = Client();
-	qqch.Test();
+	Client::Test();
 	TicTacToe_Client::Connect form;
 	Application::Run(%form);
 }
