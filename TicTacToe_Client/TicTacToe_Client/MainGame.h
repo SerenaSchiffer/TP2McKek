@@ -1,7 +1,9 @@
 #pragma once
 
+
 #include <string>
 #include <iostream>
+#include "GameBoard.h"
 
 namespace TicTacToe_Client {
 
@@ -18,12 +20,14 @@ namespace TicTacToe_Client {
 	public ref class MainGame : public System::Windows::Forms::Form
 	{
 	public:
+		GameBoard myGameBoard;
+	private: System::Windows::Forms::HelpProvider^  helpProvider1;
+	public:
+		Symboles joueurCourant;
+
 		MainGame(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
 		}
 
 	protected:
@@ -53,24 +57,8 @@ namespace TicTacToe_Client {
 	private: System::Windows::Forms::Label^  label2;
 	private: System::Windows::Forms::Label^  playerSign;
 
-
-
-
-
-
-
-
-
-
-
-
-
 	protected:
-
-
-
-	protected:
-
+		
 	private:
 		/// <summary>
 		/// Required designer variable.
@@ -99,6 +87,7 @@ namespace TicTacToe_Client {
 			this->currentPlayer = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->playerSign = (gcnew System::Windows::Forms::Label());
+			this->helpProvider1 = (gcnew System::Windows::Forms::HelpProvider());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->case1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->case2))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->case3))->BeginInit();
@@ -113,6 +102,7 @@ namespace TicTacToe_Client {
 			// 
 			// case1
 			// 
+			this->case1->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->case1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"case1.Image")));
 			this->case1->Location = System::Drawing::Point(10, 10);
 			this->case1->Name = L"case1";
@@ -124,6 +114,7 @@ namespace TicTacToe_Client {
 			// 
 			// case2
 			// 
+			this->case2->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->case2->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"case2.Image")));
 			this->case2->Location = System::Drawing::Point(170, 10);
 			this->case2->Name = L"case2";
@@ -134,6 +125,7 @@ namespace TicTacToe_Client {
 			// 
 			// case3
 			// 
+			this->case3->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->case3->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"case3.Image")));
 			this->case3->Location = System::Drawing::Point(330, 10);
 			this->case3->Name = L"case3";
@@ -144,6 +136,7 @@ namespace TicTacToe_Client {
 			// 
 			// case4
 			// 
+			this->case4->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->case4->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"case4.Image")));
 			this->case4->Location = System::Drawing::Point(10, 170);
 			this->case4->Name = L"case4";
@@ -154,6 +147,7 @@ namespace TicTacToe_Client {
 			// 
 			// case6
 			// 
+			this->case6->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->case6->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"case6.Image")));
 			this->case6->Location = System::Drawing::Point(330, 170);
 			this->case6->Name = L"case6";
@@ -164,6 +158,7 @@ namespace TicTacToe_Client {
 			// 
 			// case7
 			// 
+			this->case7->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->case7->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"case7.Image")));
 			this->case7->Location = System::Drawing::Point(10, 330);
 			this->case7->Name = L"case7";
@@ -174,6 +169,7 @@ namespace TicTacToe_Client {
 			// 
 			// case8
 			// 
+			this->case8->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->case8->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"case8.Image")));
 			this->case8->Location = System::Drawing::Point(170, 330);
 			this->case8->Name = L"case8";
@@ -184,6 +180,7 @@ namespace TicTacToe_Client {
 			// 
 			// case5
 			// 
+			this->case5->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->case5->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"case5.Image")));
 			this->case5->Location = System::Drawing::Point(170, 170);
 			this->case5->Name = L"case5";
@@ -194,6 +191,7 @@ namespace TicTacToe_Client {
 			// 
 			// case9
 			// 
+			this->case9->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->case9->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"case9.Image")));
 			this->case9->Location = System::Drawing::Point(330, 330);
 			this->case9->Name = L"case9";
@@ -283,6 +281,8 @@ namespace TicTacToe_Client {
 			this->Controls->Add(this->background);
 			this->Name = L"MainGame";
 			this->Text = L"MainGame";
+			this->PaddingChanged += gcnew System::EventHandler(this, &MainGame::MainGame_PaddingChanged);
+			this->Validated += gcnew System::EventHandler(this, &MainGame::MainGame_Validated);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->case1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->case2))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->case3))->EndInit();
@@ -335,6 +335,12 @@ namespace TicTacToe_Client {
 		
 		//TODO: choisir traiter la case
 		std::cout << numCase;
+		myGameBoard.AddSymbole(numCase, joueurCourant);
 	}
+private: System::Void MainGame_PaddingChanged(System::Object^  sender, System::EventArgs^  e) {
+}
+private: System::Void MainGame_Validated(System::Object^  sender, System::EventArgs^  e) {
+	//TODO : case1->Image = 
+}
 };
 }
