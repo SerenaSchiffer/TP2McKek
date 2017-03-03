@@ -138,6 +138,7 @@
   <ItemGroup>
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="Connect.cpp" />
+    <ClCompile Include="GameBoard.cpp" />
     <ClCompile Include="MainGame.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -145,6 +146,7 @@
     <ClInclude Include="Connect.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="GameBoard.h" />
     <ClInclude Include="MainGame.h">
       <FileType>CppForm</FileType>
     </ClInclude>
