@@ -11,7 +11,7 @@ public:
 	static void Test();
 	static void Connect();
 	static void SendData(char* data);
-	static void ReceiveData(char* data);
+	static void ReceiveData();
 
 };
 

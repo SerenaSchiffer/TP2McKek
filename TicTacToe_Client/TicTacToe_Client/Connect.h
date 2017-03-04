@@ -160,9 +160,12 @@ namespace TicTacToe_Client {
 		std::cout << Client::nbPort << std::endl;
 		std::cout << Client::server << std::endl;
 
+
+		//Bout de code a enlever (enlever le send et le receive et le gérer a la bonne place)
 		Form::Visible = false;
 		Client::Connect();
 		Client::SendData("allo");
+		Client::ReceiveData();
 		TicTacToe_Client::MainGame form;
 		form.ShowDialog();
 	}

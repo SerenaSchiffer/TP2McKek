@@ -127,8 +127,6 @@ void Serveur::Receive()
 	if (nRet == INVALID_SOCKET)
 	{
 		PRINTERROR("recv()");
-		closesocket(socketServeur);
-		closesocket(socketDistant[playerId]);
 		return;
 	}
 

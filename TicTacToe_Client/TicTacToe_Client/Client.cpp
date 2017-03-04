@@ -90,8 +90,9 @@ void Client::SendData(char* data)
 	}
 }
 
-void Client::ReceiveData(char* data)
+void Client::ReceiveData()
 {
+	char* data;
 	int nRet;
 	nRet = recv(socketClient, data, sizeof(data), 0);
 	if (nRet == SOCKET_ERROR)
