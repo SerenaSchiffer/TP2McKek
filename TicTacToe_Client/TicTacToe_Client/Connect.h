@@ -152,8 +152,9 @@ namespace TicTacToe_Client {
 		std::cout << Client::server << std::endl;
 
 		Form::Visible = false;
+		Client::Connect();
 		TicTacToe_Client::MainGame form;
-		Form::ShowDialog(%form);
+		form.ShowDialog();
 	}
 };
 }

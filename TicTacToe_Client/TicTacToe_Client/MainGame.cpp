@@ -1,15 +1,14 @@
 #include "MainGame.h"
+#include "Client.h"
+#include <iostream>
 
 using namespace System;
 using namespace System::Windows::Forms;
 
 
 [STAThread]
-void main2()
+static void main2()
 {
-	Application::EnableVisualStyles();
-	Application::SetCompatibleTextRenderingDefault(false);
-
-	//TicTacToe_Client::Connect form;
-	//Application::Run(%form);
+	Client leClient;
+	std::cout << Client::nbPort << " " << Client::server;
 }
