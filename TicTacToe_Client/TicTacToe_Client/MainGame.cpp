@@ -5,11 +5,11 @@ using namespace System::Windows::Forms;
 
 
 [STAThread]
-void main()
+void main2()
 {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 
-	TicTacToe_Client::MainGame form;
-	Application::Run(%form);
+	//TicTacToe_Client::Connect form;
+	//Application::Run(%form);
 }

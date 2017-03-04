@@ -6,11 +6,10 @@ using namespace System::Windows::Forms;
 
 
 [STAThread]
-void main2()
+void main()
 {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
-	Client::Test();
 	TicTacToe_Client::Connect form;
 	Application::Run(%form);
 }

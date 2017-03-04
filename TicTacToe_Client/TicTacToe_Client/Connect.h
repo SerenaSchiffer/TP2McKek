@@ -1,4 +1,9 @@
 # include <winsock2.h>
+#include <iostream>
+#include <string>
+#include "Client.h"
+#include "MainGame.h"
+using namespace System::Runtime::InteropServices;
 
 namespace TicTacToe_Client {
 
@@ -137,6 +142,18 @@ namespace TicTacToe_Client {
 		bind(*clientSocket, (SOCKADDR *)&sin, sizeof(sin));
 		WSACleanup();
 		*/
+
+		String  ^ipAddr = tbIpAddress->Text;
+		String ^port = textBox1->Text;
+		IntPtr ptrNativeString = Marshal::StringToHGlobalAnsi(ipAddr);
+		Client::nbPort = System::Int16::Parse(port);
+		Client::server = static_cast<char*>(ptrNativeString.ToPointer());
+		std::cout << Client::nbPort << std::endl;
+		std::cout << Client::server << std::endl;
+
+		Form::Visible = false;
+		TicTacToe_Client::MainGame form;
+		Form::ShowDialog(%form);
 	}
 };
 }

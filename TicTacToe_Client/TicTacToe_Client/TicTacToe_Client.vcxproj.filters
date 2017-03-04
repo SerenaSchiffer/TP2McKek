@@ -16,4 +16,7 @@
     <EmbeddedResource Include="Connect.resx" />
     <EmbeddedResource Include="MainGame.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
 </Project>
