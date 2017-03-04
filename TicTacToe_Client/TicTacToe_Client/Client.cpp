@@ -15,7 +15,6 @@ Client::Client()
 {
 	nbPort = 1234;
 	server = "127.0.0.1";
-	socketClient = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 }
 
 void Client::Test()
@@ -24,6 +23,18 @@ void Client::Test()
 
 void Client::Connect()
 {
+	WORD wsVersionRequested = MAKEWORD(1, 1);
+	WSADATA wsaData;
+	short numPort = 5214; //Mettre le numéro de port à 5214
+	int nRet;
+
+	nRet = WSAStartup(wsVersionRequested, &wsaData);
+	if (wsaData.wVersion != wsVersionRequested)
+	{
+		cout << "Mauvaise version";
+		return;
+	}
+
 	char sizeBuff[BUFF_SIZE];
 
 	cout << "Le client se connecte au serveur :" << server << " sur le port " << nbPort << endl;
@@ -37,6 +48,8 @@ void Client::Connect()
 		PRINTERROR("gethostbyname()");
 		return;
 	}
+
+	socketClient = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 
 	if (socketClient == INVALID_SOCKET)
 	{
@@ -53,7 +66,6 @@ void Client::Connect()
 
 	// Le client se connecte au serveur
 
-	int nRet;
 
 	nRet = connect(socketClient, (LPSOCKADDR)&socAdrServeur, sizeof(struct sockaddr));
 

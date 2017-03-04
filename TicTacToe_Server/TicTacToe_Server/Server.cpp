@@ -16,6 +16,7 @@ using namespace std;
 Serveur::Serveur()
 {
 	cpt = 0;
+	playerId = 0;
 }
 
 void Serveur::ServeurConnect(int noPort)
@@ -84,7 +85,10 @@ void Serveur::ServeurConnect(int noPort)
 
 	cout << "\nBloque à accept()";
 
-	socketDistant[cpt++] = accept(socketServeur, NULL, NULL);
+	for (int i = 0; i < 2;i++)
+	{
+		socketDistant[cpt++] = accept(socketServeur, NULL, NULL);
+	}
 
 	if (cpt >= 2)
 		socketDistant[cpt].~SOCKET();
@@ -117,8 +121,9 @@ void Serveur::Receive()
 	char buffer[BUFF_SIZE];
 
 	memset(buffer, 0, sizeof(buffer));
+	cout << "Waitinf for receive" << endl;
 	nRet = recv(socketDistant[playerId], buffer, sizeof(buffer), 0);
-
+	cout << buffer << " received" << endl;
 	if (nRet == INVALID_SOCKET)
 	{
 		PRINTERROR("recv()");
@@ -153,6 +158,10 @@ void main()
 
 	//Appeler la fonction Serveur
 	server->ServeurConnect(numPort);
+	while (true)
+	{
+		server->Receive();
+	}
 
 	//Fermer le winsock
 	WSACleanup();

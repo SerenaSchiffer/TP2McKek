@@ -72,41 +72,49 @@ namespace TicTacToe_Client {
 			// 
 			// tbIpAddress
 			// 
-			this->tbIpAddress->Location = System::Drawing::Point(59, 67);
+			this->tbIpAddress->Location = System::Drawing::Point(44, 54);
+			this->tbIpAddress->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->tbIpAddress->Name = L"tbIpAddress";
-			this->tbIpAddress->Size = System::Drawing::Size(164, 22);
+			this->tbIpAddress->Size = System::Drawing::Size(124, 20);
 			this->tbIpAddress->TabIndex = 0;
+			this->tbIpAddress->Text = L"127.0.0.1";
+			this->tbIpAddress->TextChanged += gcnew System::EventHandler(this, &Connect::tbIpAddress_TextChanged);
 			// 
 			// lblIpAddress
 			// 
 			this->lblIpAddress->AutoSize = true;
-			this->lblIpAddress->Location = System::Drawing::Point(100, 47);
+			this->lblIpAddress->Location = System::Drawing::Point(75, 38);
+			this->lblIpAddress->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->lblIpAddress->Name = L"lblIpAddress";
-			this->lblIpAddress->Size = System::Drawing::Size(75, 17);
+			this->lblIpAddress->Size = System::Drawing::Size(57, 13);
 			this->lblIpAddress->TabIndex = 1;
 			this->lblIpAddress->Text = L"Ip Address";
 			// 
 			// textBox1
 			// 
-			this->textBox1->Location = System::Drawing::Point(59, 143);
+			this->textBox1->Location = System::Drawing::Point(44, 116);
+			this->textBox1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(164, 22);
+			this->textBox1->Size = System::Drawing::Size(124, 20);
 			this->textBox1->TabIndex = 2;
+			this->textBox1->Text = L"1234";
 			// 
 			// lblPort
 			// 
 			this->lblPort->AutoSize = true;
-			this->lblPort->Location = System::Drawing::Point(125, 123);
+			this->lblPort->Location = System::Drawing::Point(94, 100);
+			this->lblPort->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->lblPort->Name = L"lblPort";
-			this->lblPort->Size = System::Drawing::Size(34, 17);
+			this->lblPort->Size = System::Drawing::Size(26, 13);
 			this->lblPort->TabIndex = 3;
 			this->lblPort->Text = L"Port";
 			// 
 			// buttonConnexion
 			// 
-			this->buttonConnexion->Location = System::Drawing::Point(180, 200);
+			this->buttonConnexion->Location = System::Drawing::Point(135, 162);
+			this->buttonConnexion->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->buttonConnexion->Name = L"buttonConnexion";
-			this->buttonConnexion->Size = System::Drawing::Size(90, 41);
+			this->buttonConnexion->Size = System::Drawing::Size(68, 33);
 			this->buttonConnexion->TabIndex = 4;
 			this->buttonConnexion->Text = L"Connexion";
 			this->buttonConnexion->UseVisualStyleBackColor = true;
@@ -114,14 +122,15 @@ namespace TicTacToe_Client {
 			// 
 			// Connect
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(282, 253);
+			this->ClientSize = System::Drawing::Size(212, 206);
 			this->Controls->Add(this->buttonConnexion);
 			this->Controls->Add(this->lblPort);
 			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->lblIpAddress);
 			this->Controls->Add(this->tbIpAddress);
+			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Name = L"Connect";
 			this->Text = L"Connexion Screen";
 			this->ResumeLayout(false);
@@ -153,8 +162,11 @@ namespace TicTacToe_Client {
 
 		Form::Visible = false;
 		Client::Connect();
+		Client::SendData("allo");
 		TicTacToe_Client::MainGame form;
 		form.ShowDialog();
 	}
+private: System::Void tbIpAddress_TextChanged(System::Object^  sender, System::EventArgs^  e) {
+}
 };
 }

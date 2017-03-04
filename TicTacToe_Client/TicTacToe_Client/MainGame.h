@@ -28,7 +28,9 @@ namespace TicTacToe_Client {
 		MainGame(void)
 		{
 			InitializeComponent();
+			
 		}
+
 
 	protected:
 		/// <summary>

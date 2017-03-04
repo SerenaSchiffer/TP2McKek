@@ -12,3 +12,4 @@ static void main2()
 	Client leClient;
 	std::cout << Client::nbPort << " " << Client::server;
 }
+

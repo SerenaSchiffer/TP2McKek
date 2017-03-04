@@ -17,5 +17,5 @@ private:
 	int playerId;
 
 	SOCKET socketServeur;
-	SOCKET *socketDistant;
+	SOCKET socketDistant[2];
 };
