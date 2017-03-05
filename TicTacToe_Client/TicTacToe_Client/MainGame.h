@@ -21,14 +21,25 @@ namespace TicTacToe_Client {
 	{
 	public:
 		GameBoard myGameBoard;
+		array<String ^>^ picturesPaths;
+		array<String ^>^ symboleNames;
 	private: System::Windows::Forms::HelpProvider^  helpProvider1;
 	public:
 		Symboles joueurCourant;
-
+		Symboles joueurClient;
 		MainGame(void)
 		{
 			InitializeComponent();
-			
+			picturesPaths = gcnew array<String ^>(3);
+			picturesPaths[0] = "vide.png";
+			picturesPaths[1] = "x.png";
+			picturesPaths[2] = "o.png";
+			symboleNames = gcnew array<String ^>(3);
+			symboleNames[0] = " ";
+			symboleNames[1] = "X";
+			symboleNames[2] = "O";
+			joueurCourant = Symboles::x;
+			joueurClient = Symboles::x;
 		}
 
 
@@ -283,8 +294,7 @@ namespace TicTacToe_Client {
 			this->Controls->Add(this->background);
 			this->Name = L"MainGame";
 			this->Text = L"MainGame";
-			this->PaddingChanged += gcnew System::EventHandler(this, &MainGame::MainGame_PaddingChanged);
-			this->Validated += gcnew System::EventHandler(this, &MainGame::MainGame_Validated);
+			this->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MainGame::MainGame_Paint);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->case1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->case2))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->case3))->EndInit();
@@ -303,7 +313,7 @@ namespace TicTacToe_Client {
 	private: System::Void case_Click(System::Object^  sender, System::EventArgs^  e) {
 		//Déterminer on est sur quel controle
 		int numCase = 0;
-		#pragma region chooseNumCase
+#pragma region chooseNumCase
 		if (sender == case1)
 			numCase = 1;
 
@@ -333,16 +343,45 @@ namespace TicTacToe_Client {
 
 		if (sender == case9)
 			numCase = 9;
-		#pragma endregion chooseNumCase
-		
-		//TODO: choisir traiter la case
-		std::cout << numCase;
-		myGameBoard.AddSymbole(numCase, joueurCourant);
+#pragma endregion chooseNumCase
+
+		//Tries to add symbol
+		if (myGameBoard.cases[numCase - 1] == Symboles::vide &&joueurCourant == joueurClient)
+		{
+			myGameBoard.AddSymbole(numCase, joueurCourant);
+			joueurCourant = (Symboles)(3 - joueurCourant); // Toggle entre x et o
+		}
+
+		if (myGameBoard.CheckWinner() != Symboles::vide) // Winner is decided
+		{
+			this->Invalidate();
+			MessageBox::Show("Player " + symboleNames[myGameBoard.CheckWinner()] + " wins !");
+			myGameBoard.ResetGame();
+			joueurCourant = Symboles::x;
+		}
+
+		if (myGameBoard.isDraw()) // Draw game
+		{
+			this->Invalidate();
+			MessageBox::Show("The game ends in a draw !");
+			myGameBoard.ResetGame();
+			joueurCourant = Symboles::x;
+		}
+		this->Invalidate();
 	}
-private: System::Void MainGame_PaddingChanged(System::Object^  sender, System::EventArgs^  e) {
-}
-private: System::Void MainGame_Validated(System::Object^  sender, System::EventArgs^  e) {
-	//TODO : case1->Image = 
+private: System::Void MainGame_Paint(System::Object^  sender, System::Windows::Forms::PaintEventArgs^  e) {
+	currentPlayer->Text = symboleNames[joueurCourant];
+	playerSign->Text = symboleNames[joueurClient];
+
+	case1->Image = Image::FromFile("Images\\" + picturesPaths[myGameBoard.cases[0]]);
+	case2->Image = Image::FromFile("Images\\" + picturesPaths[myGameBoard.cases[1]]);
+	case3->Image = Image::FromFile("Images\\" + picturesPaths[myGameBoard.cases[2]]);
+	case4->Image = Image::FromFile("Images\\" + picturesPaths[myGameBoard.cases[3]]);
+	case5->Image = Image::FromFile("Images\\" + picturesPaths[myGameBoard.cases[4]]);
+	case6->Image = Image::FromFile("Images\\" + picturesPaths[myGameBoard.cases[5]]);
+	case7->Image = Image::FromFile("Images\\" + picturesPaths[myGameBoard.cases[6]]);
+	case8->Image = Image::FromFile("Images\\" + picturesPaths[myGameBoard.cases[7]]);
+	case9->Image = Image::FromFile("Images\\" + picturesPaths[myGameBoard.cases[8]]);
 }
 };
 }

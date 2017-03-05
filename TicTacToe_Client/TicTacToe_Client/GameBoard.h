@@ -9,8 +9,11 @@ public enum Symboles {
 ref class GameBoard
 {
 public:
-	array<int> ^cases;
+	array<Symboles> ^cases;
 	GameBoard();
 	void AddSymbole(int position, Symboles symb);
+	Symboles CheckWinner();
+	void ResetGame();
+	bool isDraw();
 };
 

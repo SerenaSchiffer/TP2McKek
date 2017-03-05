@@ -150,6 +150,7 @@
     <ClInclude Include="MainGame.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Connect.resx">
@@ -161,6 +162,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TicTacToe_Client.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Images\o.png" />
+    <Image Include="..\Images\vide.png" />
+    <Image Include="..\Images\x.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
