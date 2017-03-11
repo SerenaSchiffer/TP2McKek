@@ -130,7 +130,7 @@ void Serveur::Receive()
 	char buffer[BUFF_SIZE];
 
 	memset(buffer, 0, sizeof(buffer));
-	cout << "Waitinf for receive" << endl;
+	cout << "Waiting for receive" << endl;
 	nRet = recv(socketDistant[playerId], buffer, sizeof(buffer), 0);
 	cout << buffer << " received" << endl;
 	if (nRet == INVALID_SOCKET)

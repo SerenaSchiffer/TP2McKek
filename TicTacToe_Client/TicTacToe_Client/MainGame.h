@@ -28,10 +28,42 @@ namespace TicTacToe_Client {
 	public:
 		Symboles joueurCourant;
 		Symboles joueurClient;
-		/*void OnReceive()
+		void OnReceive()
 		{
-			while()
-		}*/
+			char* msg = "error";
+			while (msg == "error")
+			{
+				msg = Client::ReceiveData();
+			}
+			int numCase = atoi(msg);
+			//Tries to add symbol
+			if (myGameBoard.cases[numCase - 1] == Symboles::vide &&joueurCourant == joueurClient)
+			{
+				myGameBoard.AddSymbole(numCase, joueurCourant);
+				joueurCourant = (Symboles)(3 - joueurCourant); // Toggle entre x et o
+				std::string s = std::to_string(numCase);
+				char* msg = new char[s.length()];
+				strcpy(msg, s.c_str());
+				Client::SendData(msg);
+			}
+
+			if (myGameBoard.CheckWinner() != Symboles::vide) // Winner is decided
+			{
+				this->Invalidate();
+				MessageBox::Show("Player " + symboleNames[myGameBoard.CheckWinner()] + " wins !");
+				myGameBoard.ResetGame();
+				joueurCourant = Symboles::x;
+			}
+
+			if (myGameBoard.isDraw()) // Draw game
+			{
+				this->Invalidate();
+				MessageBox::Show("The game ends in a draw !");
+				myGameBoard.ResetGame();
+				joueurCourant = Symboles::x;
+			}
+
+		}
 		MainGame(void)
 		{
 			InitializeComponent();
@@ -53,6 +85,7 @@ namespace TicTacToe_Client {
 			else
 			{
 				joueurClient = Symboles::o;
+				//OnReceive();
 			}
 		}
 
@@ -387,7 +420,7 @@ namespace TicTacToe_Client {
 		}
 		this->Invalidate();
 	}
-private: System::Void MainGame_Paint(System::Object^  sender, System::Windows::Forms::PaintEventArgs^  e) {
+private: System::Void MainGame_Paint(System::Object^  sender, System::Windows::Forms::PaintEventArgs^  e) {	
 	currentPlayer->Text = symboleNames[joueurCourant];
 	playerSign->Text = symboleNames[joueurClient];
 
