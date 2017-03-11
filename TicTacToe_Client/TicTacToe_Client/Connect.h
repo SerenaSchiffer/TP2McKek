@@ -164,8 +164,8 @@ namespace TicTacToe_Client {
 		//Bout de code a enlever (enlever le send et le receive et le gérer a la bonne place)
 		Form::Visible = false;
 		Client::Connect();
-		Client::SendData("allo");
-		Client::ReceiveData();
+		//Client::SendData("allo");
+		//Client::ReceiveData();
 		TicTacToe_Client::MainGame form;
 		form.ShowDialog();
 	}

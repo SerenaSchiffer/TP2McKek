@@ -85,12 +85,11 @@ void Client::SendData(char* data)
 	if (nRet == SOCKET_ERROR)
 	{
 		PRINTERROR("send()");
-		closesocket(socketClient);
 		return;
 	}
 }
 
-void Client::ReceiveData()
+char* Client::ReceiveData()
 {
 	char* data;
 	int nRet;
@@ -98,7 +97,8 @@ void Client::ReceiveData()
 	if (nRet == SOCKET_ERROR)
 	{
 		PRINTERROR("recv()");
-		closesocket(socketClient);
-		return;
+		return "error";
 	}
+	return data;
+
 }

@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include "GameBoard.h"
+#include "Client.h"
 
 namespace TicTacToe_Client {
 
@@ -27,6 +28,10 @@ namespace TicTacToe_Client {
 	public:
 		Symboles joueurCourant;
 		Symboles joueurClient;
+		/*void OnReceive()
+		{
+			while()
+		}*/
 		MainGame(void)
 		{
 			InitializeComponent();
@@ -39,7 +44,16 @@ namespace TicTacToe_Client {
 			symboleNames[1] = "X";
 			symboleNames[2] = "O";
 			joueurCourant = Symboles::x;
-			joueurClient = Symboles::x;
+			char* joueur = Client::ReceiveData();
+			int joueurInt = atoi(joueur);
+			if (joueurInt == 0)
+			{
+				joueurClient = Symboles::x;
+			}
+			else
+			{
+				joueurClient = Symboles::o;
+			}
 		}
 
 
@@ -350,6 +364,10 @@ namespace TicTacToe_Client {
 		{
 			myGameBoard.AddSymbole(numCase, joueurCourant);
 			joueurCourant = (Symboles)(3 - joueurCourant); // Toggle entre x et o
+			std::string s = std::to_string(numCase);
+			char* msg = new char[s.length()];
+			strcpy(msg, s.c_str());
+			Client::SendData(msg);
 		}
 
 		if (myGameBoard.CheckWinner() != Symboles::vide) // Winner is decided

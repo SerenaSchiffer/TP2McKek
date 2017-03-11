@@ -85,9 +85,20 @@ void Serveur::ServeurConnect(int noPort)
 
 	cout << "\nBloque à accept()";
 
-	for (int i = 0; i < 2;i++)
+	for (int i = 0; i < 2; i++)
 	{
 		socketDistant[cpt++] = accept(socketServeur, NULL, NULL);
+		if (playerId == 0)
+		{
+			Send("0");
+			playerId = 1;
+		}
+		else
+		{
+			Send("1");
+			playerId = 0;
+		}
+		
 	}
 
 	if (cpt >= 2)
@@ -110,8 +121,6 @@ void Serveur::Send(char* message)
 	if (nRet = SOCKET_ERROR)
 	{
 		PRINTERROR("send()");
-		closesocket(socketServeur);
-		closesocket(socketDistant[playerId]);
 		return;
 	}
 }

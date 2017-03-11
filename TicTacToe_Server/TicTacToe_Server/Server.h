@@ -10,11 +10,11 @@ public:
 	void ServeurConnect(int noPort);
 	void Send(char* message);
 	void Receive();
+	int playerId;
 
 private:
 	int nRet;
 	int cpt;
-	int playerId;
 
 	SOCKET socketServeur;
 	SOCKET socketDistant[2];
