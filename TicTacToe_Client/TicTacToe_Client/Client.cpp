@@ -93,7 +93,7 @@ void Client::SendData(char* data)
 
 char* Client::ReceiveData()
 {
-	char* data;
+	char data[1024];
 	int nRet;
 	nRet = recv(Client::socketClient, data,sizeof(data),flag);
 	if (nRet != SOCKET_ERROR)
@@ -103,6 +103,6 @@ char* Client::ReceiveData()
 		PRINTERROR("recv()");
 		return "error";
 	}
-	return data;
 
+	return data;
 }

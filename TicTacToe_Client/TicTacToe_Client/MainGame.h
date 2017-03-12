@@ -34,10 +34,10 @@ namespace TicTacToe_Client {
 			while (strcmp(msg,"error") == 0)
 			{
 				msg = Client::ReceiveData();
-				std::cout << "LA JSUIS TANNE EN TABARNAK " << msg << std::endl;
+				std::cout << msg << std::endl;
 			}
 			int numCase = atoi(msg);
-			std::cout << "le numcase = " << numCase << std::endl;
+			
 			//Tries to add symbol
 			if (myGameBoard.cases[numCase - 1] == Symboles::vide &&joueurCourant == joueurClient)
 			{
@@ -80,6 +80,7 @@ namespace TicTacToe_Client {
 			joueurCourant = Symboles::x;
 			char* joueur = Client::ReceiveData();
 			int joueurInt = atoi(joueur);
+			std::cout << "Je suis le joueur " << joueurInt << std::endl;
 			if (joueurInt == 0)
 			{
 				std::cout << "Je suis X" << std::endl;
