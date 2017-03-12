@@ -7,6 +7,7 @@ public:
 	Client();
 	static short nbPort;
 	static char* server;
+	static int flag;
 	static SOCKET socketClient;
 	static void Test();
 	static void Connect();

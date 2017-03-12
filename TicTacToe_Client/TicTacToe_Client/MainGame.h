@@ -31,11 +31,13 @@ namespace TicTacToe_Client {
 		void OnReceive()
 		{
 			char* msg = "error";
-			while (msg == "error")
+			while (strcmp(msg,"error") == 0)
 			{
 				msg = Client::ReceiveData();
+				std::cout << "LA JSUIS TANNE EN TABARNAK " << msg << std::endl;
 			}
 			int numCase = atoi(msg);
+			std::cout << "le numcase = " << numCase << std::endl;
 			//Tries to add symbol
 			if (myGameBoard.cases[numCase - 1] == Symboles::vide &&joueurCourant == joueurClient)
 			{
@@ -62,7 +64,7 @@ namespace TicTacToe_Client {
 				myGameBoard.ResetGame();
 				joueurCourant = Symboles::x;
 			}
-
+			this->Invalidate();
 		}
 		MainGame(void)
 		{
@@ -80,12 +82,15 @@ namespace TicTacToe_Client {
 			int joueurInt = atoi(joueur);
 			if (joueurInt == 0)
 			{
+				std::cout << "Je suis X" << std::endl;
 				joueurClient = Symboles::x;
+				Client::flag = 0;
 			}
 			else
 			{
+				std::cout << "Je suis O" << std::endl;
 				joueurClient = Symboles::o;
-				//OnReceive();
+				Client::flag = 1;
 			}
 		}
 
@@ -433,6 +438,11 @@ private: System::Void MainGame_Paint(System::Object^  sender, System::Windows::F
 	case7->Image = Image::FromFile("Images\\" + picturesPaths[myGameBoard.cases[6]]);
 	case8->Image = Image::FromFile("Images\\" + picturesPaths[myGameBoard.cases[7]]);
 	case9->Image = Image::FromFile("Images\\" + picturesPaths[myGameBoard.cases[8]]);
+	if (joueurCourant != joueurClient)
+	{
+		std::cout << "Waiting for server";
+		OnReceive();
+	}
 }
 };
 }

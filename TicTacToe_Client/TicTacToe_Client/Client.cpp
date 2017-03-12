@@ -15,6 +15,7 @@ Client::Client()
 {
 	nbPort = 1234;
 	server = "127.0.0.1";
+	flag = 0;
 }
 
 void Client::Test()
@@ -80,7 +81,8 @@ void Client::Connect()
 void Client::SendData(char* data)
 {
 	int nRet;
-	nRet = send(Client::socketClient, data, strlen(data), 0);
+	nRet = send(Client::socketClient, data, strlen(data), flag);
+	cout << "im sending: " << data << endl;
 
 	if (nRet == SOCKET_ERROR)
 	{
@@ -93,7 +95,9 @@ char* Client::ReceiveData()
 {
 	char* data;
 	int nRet;
-	nRet = recv(socketClient, data, sizeof(data), 0);
+	nRet = recv(Client::socketClient, data,sizeof(data),flag);
+	if (nRet != SOCKET_ERROR)
+		cout << "I received : " << data << endl;;
 	if (nRet == SOCKET_ERROR)
 	{
 		PRINTERROR("recv()");

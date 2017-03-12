@@ -116,7 +116,7 @@ void Serveur::Send(char* message)
 {
 	char sizebuff[BUFF_SIZE];
 
-	nRet = send(socketDistant[playerId], message, sizeof(message), 0);
+	nRet = send(socketDistant[playerId], message, sizeof(message), playerId);
 
 	if (nRet = SOCKET_ERROR)
 	{
@@ -131,7 +131,7 @@ void Serveur::Receive()
 
 	memset(buffer, 0, sizeof(buffer));
 	cout << "Waiting for receive" << endl;
-	nRet = recv(socketDistant[playerId], buffer, sizeof(buffer), 0);
+	nRet = recv(socketDistant[playerId], buffer, sizeof(buffer), playerId);
 	cout << buffer << " received" << endl;
 	if (nRet == INVALID_SOCKET)
 	{
