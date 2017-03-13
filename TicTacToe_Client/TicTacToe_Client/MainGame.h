@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iostream>
+#include <cctype>
 #include "GameBoard.h"
 #include "Client.h"
 
@@ -30,16 +31,17 @@ namespace TicTacToe_Client {
 		Symboles joueurClient;
 		void OnReceive()
 		{
-			char* msg = "error";
-			while (strcmp(msg,"error") == 0)
+			std::string msg = "error";
+			while (msg.compare("error") == 0)
 			{
 				msg = Client::ReceiveData();
-				std::cout << msg << std::endl;
 			}
-			int numCase = atoi(msg);
+
+			std::cout << msg << std::endl;
+			int numCase = stoi(msg);
 			
 			//Tries to add symbol
-			if (myGameBoard.cases[numCase - 1] == Symboles::vide &&joueurCourant == joueurClient)
+			if (myGameBoard.cases[numCase - 1] == Symboles::vide && joueurCourant == joueurClient)
 			{
 				myGameBoard.AddSymbole(numCase, joueurCourant);
 				joueurCourant = (Symboles)(3 - joueurCourant); // Toggle entre x et o
@@ -73,14 +75,17 @@ namespace TicTacToe_Client {
 			picturesPaths[0] = "vide.png";
 			picturesPaths[1] = "x.png";
 			picturesPaths[2] = "o.png";
+
 			symboleNames = gcnew array<String ^>(3);
 			symboleNames[0] = " ";
 			symboleNames[1] = "X";
 			symboleNames[2] = "O";
 			joueurCourant = Symboles::x;
-			char* joueur = Client::ReceiveData();
-			int joueurInt = atoi(joueur);
+
+			std::string joueur = Client::ReceiveData();
+			int joueurInt = stoi(joueur);
 			std::cout << "Je suis le joueur " << joueurInt << std::endl;
+
 			if (joueurInt == 0)
 			{
 				std::cout << "Je suis X" << std::endl;
@@ -94,7 +99,6 @@ namespace TicTacToe_Client {
 				Client::flag = 1;
 			}
 		}
-
 
 	protected:
 		/// <summary>

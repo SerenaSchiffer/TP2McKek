@@ -1,6 +1,6 @@
 #include "Client.h"
 #include <stdio.h>
-#include <iostream>
+//#include <iostream>
 #include <fstream>
 
 using namespace std;
@@ -91,18 +91,19 @@ void Client::SendData(char* data)
 	}
 }
 
-char* Client::ReceiveData()
+string Client::ReceiveData()
 {
 	char data[1024];
 	int nRet;
 	nRet = recv(Client::socketClient, data,sizeof(data),flag);
 	if (nRet != SOCKET_ERROR)
-		cout << "I received : " << data << endl;;
+		cout << "I received : " << data << endl;
 	if (nRet == SOCKET_ERROR)
 	{
 		PRINTERROR("recv()");
 		return "error";
 	}
 
-	return data;
+	string returnValue(data);
+	return returnValue;
 }
