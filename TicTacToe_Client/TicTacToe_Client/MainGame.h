@@ -41,19 +41,15 @@ namespace TicTacToe_Client {
 			int numCase = stoi(msg);
 			
 			//Tries to add symbol
-			if (myGameBoard.cases[numCase - 1] == Symboles::vide && joueurCourant == joueurClient)
+			if (myGameBoard.cases[numCase - 1] == Symboles::vide && joueurCourant != joueurClient)
 			{
 				myGameBoard.AddSymbole(numCase, joueurCourant);
 				joueurCourant = (Symboles)(3 - joueurCourant); // Toggle entre x et o
-				std::string s = std::to_string(numCase);
-				char* msg = new char[s.length()];
-				strcpy(msg, s.c_str());
-				Client::SendData(msg);
 			}
 
 			if (myGameBoard.CheckWinner() != Symboles::vide) // Winner is decided
 			{
-				this->Invalidate();
+				this->Refresh();
 				MessageBox::Show("Player " + symboleNames[myGameBoard.CheckWinner()] + " wins !");
 				myGameBoard.ResetGame();
 				joueurCourant = Symboles::x;
@@ -61,7 +57,7 @@ namespace TicTacToe_Client {
 
 			if (myGameBoard.isDraw()) // Draw game
 			{
-				this->Invalidate();
+				this->Refresh();
 				MessageBox::Show("The game ends in a draw !");
 				myGameBoard.ResetGame();
 				joueurCourant = Symboles::x;
@@ -412,6 +408,12 @@ namespace TicTacToe_Client {
 			char* msg = new char[s.length()];
 			strcpy(msg, s.c_str());
 			Client::SendData(msg);
+			if (myGameBoard.CheckWinner() == Symboles::vide)
+			{
+				this->Refresh();
+				Sleep(50);
+				OnReceive();
+			}
 		}
 
 		if (myGameBoard.CheckWinner() != Symboles::vide) // Winner is decided
@@ -420,6 +422,12 @@ namespace TicTacToe_Client {
 			MessageBox::Show("Player " + symboleNames[myGameBoard.CheckWinner()] + " wins !");
 			myGameBoard.ResetGame();
 			joueurCourant = Symboles::x;
+			if (joueurClient == Symboles::o)
+			{
+				this->Refresh();
+				Sleep(50);
+				OnReceive();
+			}
 		}
 
 		if (myGameBoard.isDraw()) // Draw game
@@ -428,6 +436,12 @@ namespace TicTacToe_Client {
 			MessageBox::Show("The game ends in a draw !");
 			myGameBoard.ResetGame();
 			joueurCourant = Symboles::x;
+			if (joueurClient == Symboles::o)
+			{
+				this->Refresh();
+				Sleep(50);
+				OnReceive();
+			}
 		}
 		this->Invalidate();
 	}
@@ -446,6 +460,8 @@ private: System::Void MainGame_Paint(System::Object^  sender, System::Windows::F
 	case9->Image = Image::FromFile("Images\\" + picturesPaths[myGameBoard.cases[8]]);
 }
 private: System::Void MainGame_Shown(System::Object^  sender, System::EventArgs^  e) {
+	this->Refresh();
+	Sleep(50);
 	if(joueurClient == Symboles::o)
 		OnReceive();
 }
