@@ -90,12 +90,12 @@ void Serveur::ServeurConnect(int noPort)
 		socketDistant[cpt++] = accept(socketServeur, NULL, NULL);
 		if (playerId == 0)
 		{
-			Send("0");
+			Send("0\0\0\0\0\0\0\0");
 			playerId = 1;
 		}
 		else
 		{
-			Send("1");
+			Send("1\0\0\0\0\0\0\0");
 			playerId = 0;
 		}
 		
@@ -116,7 +116,7 @@ void Serveur::Send(char* message)
 {
 	char sizebuff[BUFF_SIZE];
 
-	nRet = send(socketDistant[playerId], message, sizeof(message), playerId);
+	nRet = send(socketDistant[playerId], message, BUFF_SIZE, 0);
 
 	if (nRet = SOCKET_ERROR)
 	{
@@ -129,9 +129,9 @@ void Serveur::Receive()
 {
 	char buffer[BUFF_SIZE];
 
-	memset(buffer, 0, sizeof(buffer));
+	memset(buffer, 0, BUFF_SIZE);
 	cout << "Waiting for receive" << endl;
-	nRet = recv(socketDistant[playerId], buffer, sizeof(buffer), playerId);
+	nRet = recv(socketDistant[playerId], buffer, BUFF_SIZE, 0);
 	cout << buffer << " received" << endl;
 	if (nRet == INVALID_SOCKET)
 	{

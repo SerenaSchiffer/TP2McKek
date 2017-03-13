@@ -351,6 +351,7 @@ namespace TicTacToe_Client {
 			this->Controls->Add(this->background);
 			this->Name = L"MainGame";
 			this->Text = L"MainGame";
+			this->Shown += gcnew System::EventHandler(this, &MainGame::MainGame_Shown);
 			this->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MainGame::MainGame_Paint);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->case1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->case2))->EndInit();
@@ -443,11 +444,10 @@ private: System::Void MainGame_Paint(System::Object^  sender, System::Windows::F
 	case7->Image = Image::FromFile("Images\\" + picturesPaths[myGameBoard.cases[6]]);
 	case8->Image = Image::FromFile("Images\\" + picturesPaths[myGameBoard.cases[7]]);
 	case9->Image = Image::FromFile("Images\\" + picturesPaths[myGameBoard.cases[8]]);
-	if (joueurCourant != joueurClient)
-	{
-		std::cout << "Waiting for server";
+}
+private: System::Void MainGame_Shown(System::Object^  sender, System::EventArgs^  e) {
+	if(joueurClient == Symboles::o)
 		OnReceive();
-	}
 }
 };
 }

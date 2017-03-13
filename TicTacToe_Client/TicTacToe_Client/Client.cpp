@@ -6,7 +6,7 @@
 using namespace std;
 
 //Définit la grandeur du buffer
-#define BUFF_SIZE 1024
+#define BUFF_SIZE 9
 
 //Définit le message d'erreur
 #define PRINTERROR(s)	cout<<"\n"<<s<<":"<<WSAGetLastError()
@@ -81,7 +81,7 @@ void Client::Connect()
 void Client::SendData(char* data)
 {
 	int nRet;
-	nRet = send(Client::socketClient, data, strlen(data), flag);
+	nRet = send(Client::socketClient, data, BUFF_SIZE, 0);
 	cout << "im sending: " << data << endl;
 
 	if (nRet == SOCKET_ERROR)
@@ -93,15 +93,15 @@ void Client::SendData(char* data)
 
 string Client::ReceiveData()
 {
-	char data[1024];
+	char data[BUFF_SIZE];
 	int nRet;
-	nRet = recv(Client::socketClient, data,sizeof(data),flag);
+	nRet = recv(Client::socketClient, data, BUFF_SIZE,0);
 	if (nRet != SOCKET_ERROR)
 		cout << "I received : " << data << endl;
 	if (nRet == SOCKET_ERROR)
 	{
 		PRINTERROR("recv()");
-		return "error";
+		//return "error";
 	}
 
 	string returnValue(data);
